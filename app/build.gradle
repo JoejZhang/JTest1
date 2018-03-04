@@ -15,13 +15,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            android.applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                 //   def file = output.outputFile
-                    output.outputFile = new File("test.apk")
 
-                }
-            }
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+               def date = new Date().format("yyyyMMddHHmmss",TimeZone.getTimeZone("GMT+08"))
+            output.outputFile = new File("${date}test.apk")
+
         }
     }
 
