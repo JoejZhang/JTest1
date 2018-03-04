@@ -19,7 +19,6 @@ android {
                 variant.outputs.each { output ->
                  //   def file = output.outputFile
                     output.outputFile = new File("test.apk")
-
                 }
             }
         }
