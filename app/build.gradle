@@ -42,7 +42,15 @@ android {
 
         }
     }
-
+    build.doLast {
+        def today = new Date().format('yyyyMMdd_hh');
+        copy{
+            from('build/outputs/apk')
+            into('build')
+            include('app-release.apk')
+            rename('app-release.apk','Test' + "_"+ today + '.apk')
+        }
+    }
 
 }
 
