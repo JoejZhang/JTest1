@@ -26,29 +26,29 @@ android {
     }
 
     signingConfigs {
-        def appStoreFile = System.getenv("STORE_FILE")
-        def appStorePassword = System.getenv("STORE_PASSWORD")
-        def appKeyAlias = System.getenv("KEY_ALIAS")
-        def appKeyPassword = System.getenv("KEY_PASSWORD")
-
-        //当不能从环境变量里获取到签名信息的时候，就使用项目中带的debug签名
-        if (!appStoreFile || !appStorePassword || !appKeyAlias || !appKeyPassword) {
-            appStoreFile = "debug.keystore"
-            appStorePassword = "android"
-            appKeyAlias = "androiddebugkey"
-            appKeyPassword = "android"
-        }
-
-        release {
-            storeFile file(appStoreFile)
-            storePassword appStorePassword
-            keyAlias appKeyAlias
-            keyPassword appKeyPassword
-        }
+//        def appStoreFile = System.getenv("STORE_FILE")
+//        def appStorePassword = System.getenv("STORE_PASSWORD")
+//        def appKeyAlias = System.getenv("KEY_ALIAS")
+//        def appKeyPassword = System.getenv("KEY_PASSWORD")
+//
+//        //当不能从环境变量里获取到签名信息的时候，就使用项目中带的debug签名
+//        if (!appStoreFile || !appStorePassword || !appKeyAlias || !appKeyPassword) {
+//            appStoreFile = "debug.keystore"
+//            appStorePassword = "android"
+//            appKeyAlias = "androiddebugkey"
+//            appKeyPassword = "android"
+//        }
+//
+//        release {
+//            storeFile file(appStoreFile)
+//            storePassword appStorePassword
+//            keyAlias appKeyAlias
+//            keyPassword appKeyPassword
+//        }
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+       //     signingConfig signingConfigs.release
             zipAlignEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -57,12 +57,8 @@ android {
     //修改生成的apk名字
     applicationVariants.all{ variant->
         variant.outputs.each { output->
-            def oldFile = output.outputFile
-            def newName = '';
             if(variant.buildType.name.equals('release')){
-                // APK输出文件名规则：aiyou-版本名-市场-release.apk
-
-                output.outputFile = new File(appReleaseDir +getDate()+ '-release.apk')
+                output.outputFile = new File(appReleaseDir+"/" +"apk/"+getDate()+ '-release.apk')
             }
             if(variant.buildType.name.equals('beta')){
             }
